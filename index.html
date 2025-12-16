@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nosso Pra Sempre</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f7f7f7, #e6e6e6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      animation: fadeIn 2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .card {
+      background: white;
+      max-width: 420px;
+      width: 90%;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.18);
+      text-align: center;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .photo {
+      position: relative;
+    }
+
+    .photo img {
+      width: 100%;
+      display: block;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      width: 70px;
+      height: 70px;
+      background: #d81b60;
+      transform: rotate(-45deg);
+      animation: pulse 1.5s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      background: #d81b60;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -35px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 35px;
+      top: 0;
+    }
+
+    @keyframes pulse {
+      0% { transform: rotate(-45deg) scale(1); }
+      50% { transform: rotate(-45deg) scale(1.08); }
+      100% { transform: rotate(-45deg) scale(1); }
+    }
+
+    .initials {
+      position: absolute;
+      top: 22px;
+      left: 10px;
+      width: 50px;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transform: rotate(45deg);
+    }
+
+    .content {
+      padding: 30px 20px 35px;
+    }
+
+    .title {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #555;
+    }
+
+    .countdown {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      color: #c2185b;
+    }
+
+    .love {
+      font-size: 26px;
+      font-weight: bold;
+      color: #d81b60;
+    }
+
+    .infinite {
+      font-size: 22px;
+      margin-top: 5px;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="photo">
+      <img src="foto.jpg" alt="Nós dois">
+
+      <div class="heart">
+        <div class="initials">P & M</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="title" id="titleText"></div>
+      <div class="countdown" id="countdown"></div>
+
+      <div class="love">Te amo</div>
+      <div class="infinite">∞</div>
+    </div>
+  </div>
+
+  <!-- Música -->
+  <audio autoplay loop>
+    <source src="sou-seu-fa-n1.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const targetDate = new Date("2027-01-04T00:00:00");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("titleText").innerText =
+          "Chegou o nosso pra sempre 💍";
+        document.getElementById("countdown").innerText = "❤️";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("titleText").innerText =
+        `Faltam ${days} dias para o nosso pra sempre`;
+
+      document.getElementById("countdown").innerText =
+        `${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
