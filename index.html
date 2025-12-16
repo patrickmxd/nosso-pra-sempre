@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nosso Pra Sempre</title>
 
+  <!-- Fonte bonita -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -19,8 +22,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #333;
-      animation: fadeIn 2s ease;
+      animation: fadeIn 1.8s ease;
     }
 
     @keyframes fadeIn {
@@ -41,11 +43,7 @@
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .photo {
-      position: relative;
+      50% { transform: translateY(-6px); }
     }
 
     .photo img {
@@ -53,57 +51,19 @@
       display: block;
     }
 
-    .heart {
-      position: absolute;
-      bottom: 15px;
-      right: 15px;
-      width: 70px;
-      height: 70px;
-      background: #d81b60;
-      transform: rotate(-45deg);
-      animation: pulse 1.5s infinite;
-    }
-
-    .heart::before,
-    .heart::after {
-      content: "";
-      position: absolute;
-      width: 70px;
-      height: 70px;
-      background: #d81b60;
-      border-radius: 50%;
-    }
-
-    .heart::before {
-      top: -35px;
-      left: 0;
-    }
-
-    .heart::after {
-      left: 35px;
-      top: 0;
-    }
-
-    @keyframes pulse {
-      0% { transform: rotate(-45deg) scale(1); }
-      50% { transform: rotate(-45deg) scale(1.08); }
-      100% { transform: rotate(-45deg) scale(1); }
-    }
-
     .initials {
-      position: absolute;
-      top: 22px;
-      left: 10px;
-      width: 50px;
-      text-align: center;
-      color: white;
-      font-weight: bold;
-      font-size: 18px;
-      transform: rotate(45deg);
+      margin-top: 18px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 48px;
+      color: #c2185b;
+    }
+
+    .initials span {
+      margin: 0 8px;
     }
 
     .content {
-      padding: 30px 20px 35px;
+      padding: 25px 20px 35px;
     }
 
     .title {
@@ -115,7 +75,7 @@
     .countdown {
       font-size: 20px;
       font-weight: bold;
-      margin-bottom: 25px;
+      margin-bottom: 22px;
       color: #c2185b;
     }
 
@@ -130,8 +90,19 @@
       margin-top: 5px;
     }
 
-    audio {
-      display: none;
+    .music-btn {
+      margin-top: 18px;
+      background: #d81b60;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .music-btn:hover {
+      background: #c2185b;
     }
   </style>
 </head>
@@ -140,11 +111,9 @@
   <div class="card">
     <div class="photo">
       <img src="foto.jpg" alt="Nós dois">
-
-      <div class="heart">
-        <div class="initials">P & M</div>
-      </div>
     </div>
+
+    <div class="initials">P <span>∞</span> M</div>
 
     <div class="content">
       <div class="title" id="titleText"></div>
@@ -152,11 +121,13 @@
 
       <div class="love">Te amo</div>
       <div class="infinite">∞</div>
+
+      <button class="music-btn" onclick="playMusic()">▶ Ouvir nossa música</button>
     </div>
   </div>
 
   <!-- Música -->
-  <audio autoplay loop>
+  <audio id="music" loop>
     <source src="sou-seu-fa-n1.mp3" type="audio/mpeg">
   </audio>
 
@@ -184,6 +155,11 @@
 
       document.getElementById("countdown").innerText =
         `${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    function playMusic() {
+      const music = document.getElementById('music');
+      music.play();
     }
 
     updateCountdown();
